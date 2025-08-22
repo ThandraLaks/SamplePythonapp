@@ -1,0 +1,23 @@
+name: AI Log Analyzer
+
+on: [push]
+
+jobs:
+  analyze_logs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install OpenAI SDK
+        run: pip install openai
+
+      - name: Run AI Log Analyzer
+        run: python ai_log_analyzer.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
